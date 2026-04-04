@@ -1,5 +1,5 @@
 /* Service Worker — Dashboard Dep. Oscar Gutz | ALESC */
-const CACHE = 'oscar-gutz-v1';
+const CACHE = 'oscar-gutz-v2';
 const ASSETS = [
   './index.html',
   './manifest.json',
