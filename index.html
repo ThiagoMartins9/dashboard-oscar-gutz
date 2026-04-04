@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- iOS PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Oscar Gutz">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+
+  <!-- Theme color (barra do navegador Android) -->
+  <meta name="theme-color" content="#0a3d22">
+  <meta name="msapplication-TileColor" content="#0a3d22">
+
+<meta name="theme-color" content="#0a2a4a">
+<title>Mandato Oscar Gutz — ALESC 2023–2027</title>
+<style>
+  :root {
+    --azul:     #0d3b6e;
+    --azul-mid: #185FA5;
+    --azul-clr: #3a87d4;
+    --ouro:     #c8972a;
+    --ouro-clr: #f5c060;
+    --bg:       #f4f2ed;
+    --card:     #ffffff;
+    --texto:    #1a1a1a;
+    --muted:    #6b6b6b;
+    --borda:    #e0dcd4;
+    --agro:     #7a4a0a;
+    --agro-bg:  #fdf0d8;
+    --saude:    #0a5c3a;
+    --saude-bg: #e6f4ee;
+    --infra:    #0c3d7a;
+    --infra-bg: #e3edf8;
+    --social:   #5a2060;
+    --social-bg:#f3e8f8;
+    --util:     #1a4a1a;
+    --util-bg:  #e8f4e8;
+    --admin:    #3a3a8a;
+    --admin-bg: #eeeef8;
+    --animal:   #6a3a00;
+    --animal-bg:#fff0e0;
+    --veto-clr: #c0392b;
+    --veto-bg:  #fdecea;
+    --proc-clr: #7a5c00;
+    --proc-bg:  #fff8e1;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--texto);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  .hero {
+    background: var(--azul);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 30px,
+      rgba(255,255,255,0.015) 30px,
+      rgba(255,255,255,0.015) 60px
+    );
+  }
+
+  .hero-inner {
+    position: relative;
+    padding: 32px 20px 24px;
+  }
+
+  .hero-topo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+
+  .avatar {
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--ouro);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--azul);
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.2);
+  }
+
+  .hero-info { flex: 1; }
+
+  .hero-partido {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ouro-clr);
+    margin-bottom: 3px;
+  }
+
+  .hero-nome {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.1;
+  }
+
+  .hero-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 3px;
+  }
+
+  .hero-legislatura {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hero-leg-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .hero-leg-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* ── STATS ── */
+  .stats-wrap {
+    background: var(--azul-mid);
+    padding: 16px 20px;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .stat-box {
+    background: rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .stat-num {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ouro-clr);
+    line-height: 1;
+  }
+
+  .stat-lbl {
+    font-size: 10px;
+    color: rgba(255,255,255,0.65);
+    margin-top: 4px;
+    line-height: 1.3;
+  }
+
+  /* ── SEÇÃO ── */
+  .secao {
+    padding: 24px 20px 0;
+  }
+
+  .secao-titulo {
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--azul);
+    border-left: 3px solid var(--ouro);
+    padding-left: 10px;
+    margin-bottom: 14px;
+  }
+
+  /* ── GRÁFICO BARRAS ── */
+  .bar-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .bar-item { display: flex; align-items: center; gap: 8px; }
+
+  .bar-label {
+    font-size: 11px;
+    color: var(--muted);
+    width: 130px;
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 7px;
+    background: var(--borda);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 1s ease;
+  }
+
+  .bar-count {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--texto);
+    width: 16px;
+    text-align: right;
+  }
+
+  /* ── FILTROS ── */
+  .filtros-wrap {
+    padding: 20px 20px 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .filtros-wrap::-webkit-scrollbar { display: none; }
+
+  .filtros-scroll {
+    display: flex;
+    gap: 7px;
+    padding-bottom: 4px;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  .filtro-btn {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 10px 16px;
+    min-height: 44px;
+    min-width: 44px;
+    border-radius: 20px;
+    border: 1.5px solid var(--borda);
+    background: var(--card);
+    color: var(--muted);
+    white-space: nowrap;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    -webkit-user-select: none;
+    user-select: none;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    outline: none;
+    position: relative;
+    z-index: 1;
+    /* reset nativo para <button> no iOS Safari */
+    -webkit-appearance: none;
+    appearance: none;
+    text-decoration: none;
+  }
+
+  .filtro-btn.ativo {
+    background: var(--azul);
+    color: #fff;
+    border-color: var(--azul);
+  }
+
+  /* ── LISTA PLs ── */
+  .pls-wrap { padding: 16px 20px; display: flex; flex-direction: column; gap: 10px; }
+
+  .pl-card {
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--borda);
+    border-left: 4px solid var(--azul-clr);
+    padding: 14px;
+    transition: box-shadow 0.2s;
+    cursor: pointer;
+  }
+
+  .pl-card.veto { border-left-color: var(--veto-clr); }
+  .pl-card.oculto { display: none; }
+
+  .pl-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+
+  .pl-numero {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--azul-mid);
+    background: #e8f0fa;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .pl-numero.veto { background: var(--veto-bg); color: var(--veto-clr); }
+
+  .pl-tag {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .pl-ementa {
+    font-size: 13px;
+    color: var(--texto);
+    line-height: 1.5;
+    font-weight: 400;
+  }
+
+  .pl-ementa b { font-weight: 600; }
+
+  .pl-rodape {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid var(--borda);
+  }
+
+  .pl-data { font-size: 11px; color: var(--muted); }
+
+  .pl-veto-badge {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--veto-clr);
+    background: var(--veto-bg);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .pl-proc-badge {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--proc-clr);
+    background: var(--proc-bg);
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .pl-emenda-badge {
+    font-size: 10px;
+    font-weight: 600;
+    color: #0a5c3a;
+    background: #e6f4ee;
+    padding: 2px 8px;
+    border-radius: 20px;
+  }
+
+  .pl-resumo {
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px dashed var(--borda);
+  }
+
+  .pl-lei-badge {
+    font-size: 10px;
+    font-weight: 700;
+    color: #0a3d22;
+    background: #c8f0d8;
+    border: 1px solid #7ecfa4;
+    padding: 2px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.2px;
+  }
+
+  .pl-card.proc { border-left-color: #c8972a; }
+  .pl-card.emenda { border-left-color: #1d9e75; }
+
+  /* tags por categoria */
+  .t-agro   { background: var(--agro-bg);   color: var(--agro); }
+  .t-saude  { background: var(--saude-bg);  color: var(--saude); }
+  .t-infra  { background: var(--infra-bg);  color: var(--infra); }
+  .t-social { background: var(--social-bg); color: var(--social); }
+  .t-util   { background: var(--util-bg);   color: var(--util); }
+  .t-pcd    { background: #ede8f8;          color: #3a1a7a; }
+  .t-admin  { background: var(--admin-bg);  color: var(--admin); }
+  .t-animal { background: var(--animal-bg); color: var(--animal); }
+
+  /* ── RODAPÉ ── */
+  .footer {
+    margin: 24px 20px;
+    padding: 16px;
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid var(--borda);
+    text-align: center;
+  }
+
+  .footer p {
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .footer strong { color: var(--azul); font-weight: 600; }
+
+  /* ── ANIMAÇÃO ENTRADA ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .pl-card { animation: fadeUp 0.35s ease both; }
+
+  /* ── CONTADOR VISÍVEL ── */
+  .contador {
+    font-size: 11px;
+    color: var(--muted);
+    padding: 0 20px;
+    margin-top: 4px;
+  }
+
+  .sem-resultado {
+    text-align: center;
+    padding: 32px 20px;
+    color: var(--muted);
+    font-size: 13px;
+    display: none;
+  }
+
+  /* ── BUSCA ── */
+  .busca-wrap { padding: 16px 20px 0; }
+
+  .busca-input {
+    width: 100%;
+    padding: 11px 14px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    border: 1.5px solid var(--borda);
+    border-radius: 10px;
+    background: var(--card);
+    color: var(--texto);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .busca-input:focus { border-color: var(--azul-mid); }
+
+  .busca-input::placeholder { color: var(--muted); }
+
+  /* Banner instalação PWA iOS */
+  #pwa-banner {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: #0a3d22;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: 13px;
+    z-index: 9999;
+    box-shadow: 0 -2px 12px rgba(0,0,0,.3);
+  }
+  #pwa-banner button {
+    background: none;
+    border: 1px solid rgba(255,255,255,.4);
+    color: white;
+    border-radius: 50%;
+    width: 26px; height: 26px;
+    cursor: pointer;
+    flex-shrink: 0;
+    font-size: 14px;
+  }
+
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-topo">
+      <div class="avatar">OG</div>
+      <div class="hero-info">
+        <div class="hero-partido">Partido Liberal · Santa Catarina</div>
+        <div class="hero-nome">Dep. Oscar Gutz</div>
+        <div class="hero-sub">Assembleia Legislativa do Estado de Santa Catarina</div>
+      </div>
+    </div>
+    <div class="hero-legislatura">
+      <div>
+        <div class="hero-leg-label">Legislatura</div>
+        <div class="hero-leg-val">23ª — 2023 a 2027</div>
+      </div>
+      <div style="text-align:right">
+        <div class="hero-leg-label">Material de</div>
+        <div class="hero-leg-val">Prestação de Contas</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-wrap">
+  <div class="stats-grid">
+    <div class="stat-box">
+      <div class="stat-num">20</div>
+      <div class="stat-lbl">Projetos aprovados</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">16</div>
+      <div class="stat-lbl">Sancionados</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">6</div>
+      <div class="stat-lbl">Áreas temáticas</div>
+    </div>
+  </div>
+</div>
+
+<!-- GRÁFICO -->
+<div class="secao">
+  <div class="secao-titulo">Distribuição por área temática</div>
+  <div class="bar-list">
+    <div class="bar-item">
+      <span class="bar-label">Utilidade pública</span>
+      <div class="bar-track"><div class="bar-fill" style="width:100%;background:#185FA5;"></div></div>
+      <span class="bar-count">8</span>
+    </div>
+    <div class="bar-item">
+      <span class="bar-label">Agric. e Agropecuária</span>
+      <div class="bar-track"><div class="bar-fill" style="width:87%;background:#c8972a;"></div></div>
+      <span class="bar-count">7</span>
+    </div>
+    <div class="bar-item">
+      <span class="bar-label">Infraestrutura</span>
+      <div class="bar-track"><div class="bar-fill" style="width:37%;background:#0c3d7a;"></div></div>
+      <span class="bar-count">3</span>
+    </div>
+    <div class="bar-item">
+      <span class="bar-label">Saúde</span>
+      <div class="bar-track"><div class="bar-fill" style="width:37%;background:#0a5c3a;"></div></div>
+      <span class="bar-count">3</span>
+    </div>
+    <div class="bar-item">
+      <span class="bar-label">Homenagem</span>
+      <div class="bar-track"><div class="bar-fill" style="width:12%;background:#5a2060;"></div></div>
+      <span class="bar-count">1</span>
+    </div>
+    <div class="bar-item">
+      <span class="bar-label">Pessoa c/ Deficiência</span>
+      <div class="bar-track"><div class="bar-fill" style="width:12%;background:#3a1a7a;"></div></div>
+      <span class="bar-count">1</span>
+    </div>
+  </div>
+</div>
+
+<!-- BUSCA -->
+<div class="busca-wrap">
+  <input class="busca-input" type="search" id="busca" placeholder="Buscar projeto pelo número ou tema...">
+</div>
+
+<!-- FILTROS -->
+<div class="filtros-wrap">
+  <div class="filtros-scroll" id="filtros">
+    <button class="filtro-btn ativo" type="button" data-cat="todos" onclick="ativarFiltro(this)">Todos</button>
+    <button class="filtro-btn" type="button" data-cat="agro" onclick="ativarFiltro(this)">Agricultura e Agropecuária</button>
+    <button class="filtro-btn" type="button" data-cat="util" onclick="ativarFiltro(this)">Utilidade Pública</button>
+    <button class="filtro-btn" type="button" data-cat="saude" onclick="ativarFiltro(this)">Saúde</button>
+    <button class="filtro-btn" type="button" data-cat="infra" onclick="ativarFiltro(this)">Infraestrutura</button>
+    <button class="filtro-btn" type="button" data-cat="social" onclick="ativarFiltro(this)">Homenagem</button>
+    <button class="filtro-btn" type="button" data-cat="pcd" onclick="ativarFiltro(this)">Pessoa com Deficiência</button>
+    <button class="filtro-btn" type="button" data-cat="veto" onclick="ativarFiltro(this)">Veto Total</button>
+  </div>
+</div>
+
+<p class="contador" id="contador">18 projetos</p>
+<p class="sem-resultado" id="sem-resultado">Nenhum projeto encontrado.</p>
+
+<!-- LISTA DE PROJETOS -->
+<div class="pls-wrap" id="lista">
+
+  <div class="pl-card" data-cat="agro" data-ano="2025" data-num="0759">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0759/2025</span>
+      <span class="pl-tag t-agro">Agricultura e Agropecuária</span>
+    </div>
+    <p class="pl-ementa"><b>Proíbe a reconstituição de leite em pó de origem importada para comercialização como leite fluido no Estado de Santa Catarina e estabelece providências correlatas.</b></p>
+    <p class="pl-resumo">Veda a indústrias, laticínios e pessoas jurídicas a reconstituição de leite em pó, composto lácteo, soro de leite e outros derivados lácteos de origem importada para consumo alimentar em SC. Sanções incluem apreensão do lote, multa (dobrada em reincidência) e cassação da Inscrição Estadual, com recursos destinados ao Fundo Estadual de Desenvolvimento Rural.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.685/2026</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="infra" data-ano="2025" data-num="0758">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0758/2025</span>
+      <span class="pl-tag t-infra">Infraestrutura</span>
+    </div>
+    <p class="pl-ementa"><b>Autorização excepcional de estacionamento de veículos em acostamentos de rodovias estaduais em ocasiões de eventos comunitários.</b></p>
+    <p class="pl-resumo">Permite o estacionamento nas faixas de domínio das rodovias estaduais em trechos adjacentes a eventos comunitários, religiosos, culturais, esportivos ou festivos. Exige comunicação prévia à PMRv com 30 dias de antecedência, anuência da autoridade rodoviária e que o organizador providencie sinalização, equipe de apoio e condições de segurança viária.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.739/2026</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="infra" data-ano="2025" data-num="0661">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0661/2025</span>
+      <span class="pl-tag t-infra">Infraestrutura</span>
+    </div>
+    <p class="pl-ementa"><b>Denomina "Rodovia Deputado Gervásio José Maciel" o trecho da Rodovia SC-281 entre Ituporanga e Atalanta, alterando o Anexo II da Lei nº 16.720/2015.</b></p>
+    <p class="pl-resumo">Homenageia o ex-prefeito e ex-deputado estadual Gervásio José Maciel, figura histórica no desenvolvimento político e econômico do Alto Vale do Itajaí. Altera o Anexo II da Lei nº 16.720/2015, que consolida leis sobre denominação de bens públicos no Estado de Santa Catarina.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.581/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="util" data-ano="2025" data-num="0615">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0615/2025</span>
+      <span class="pl-tag t-util">Utilidade Pública</span>
+    </div>
+    <p class="pl-ementa"><b>Declara de utilidade pública a Agência de Desenvolvimento, Inovação e Tecnologia Sassafrás — AGÊNCIA SASSAFRÁS, com sede em Rio do Sul/SC.</b></p>
+    <p class="pl-resumo">Confere o Título de Utilidade Pública Estadual à Agência Sassafrás, entidade que atua como articuladora do ecossistema de inovação do Alto Vale do Itajaí, conectando academia, empresas, governo e sociedade civil. Altera o Anexo Único da Lei nº 18.278/2021.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.507/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="util" data-ano="2025" data-num="0375">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0375/2025</span>
+      <span class="pl-tag t-util">Utilidade Pública</span>
+    </div>
+    <p class="pl-ementa"><b>Declara de utilidade pública a Associação Grupo de Proteção aos Animais de Rio Negrinho, alterando o Anexo Único da Lei nº 18.278/2021.</b></p>
+    <p class="pl-resumo">Declara de utilidade pública estadual a Associação Grupo de Proteção aos Animais de Rio Negrinho, com sede no Município de Rio Negrinho. Altera o Anexo Único da Lei nº 18.278/2021, que consolida os atos normativos de concessão do Título de Utilidade Pública estadual em Santa Catarina.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.435/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="saude" data-ano="2025" data-num="0358">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0358/2025</span>
+      <span class="pl-tag t-saude">Saúde</span>
+    </div>
+    <p class="pl-ementa"><b>Institui o programa Leito Garantido, com a finalidade de contratualização preventiva de leitos hospitalares com a rede privada em caso de alta ocupação da rede pública estadual.</b></p>
+    <p class="pl-resumo">Cria o Programa Leito Garantido, autorizando o Estado a contratar preventivamente leitos hospitalares privados para atendimento à população quando a ocupação das UTIs neonatal e adulto da rede pública atingir ou superar 97%. Os contratos deverão priorizar unidades hospitalares da mesma região de origem do paciente e ser firmados mediante licitação regular.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.738/2026</span>
+    </div>
+  </div>
+
+  <div class="pl-card veto" data-cat="agro veto" data-ano="2025" data-num="0072">
+    <div class="pl-card-header">
+      <span class="pl-numero veto">PL 0072/2025</span>
+      <span class="pl-tag t-agro">Agricultura e Agropecuária</span>
+    </div>
+    <p class="pl-ementa"><b>Dispõe sobre os procedimentos diagnósticos prévios ao abate de equídeos suspeitos ou reagentes à Anemia Infecciosa Equina (AIE) ou ao Mormo, no Estado de Santa Catarina.</b></p>
+    <p class="pl-resumo">Veda o abate de equídeos reagentes à AIE ou ao Mormo antes da conclusão de protocolo diagnóstico trifásico: teste inicial, contraprova em laboratório credenciado pelo MAPA e, se necessário, reteste com nova coleta supervisionada por veterinário habilitado. O abate sanitário só é autorizado após confirmação laboratorial definitiva pela autoridade sanitária competente.</p>
+    <div class="pl-rodape">
+      <span class="pl-veto-badge">Veto total — em análise no Plenário</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="agro" data-ano="2024" data-num="0269">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0269/2024</span>
+      <span class="pl-tag t-agro">Agricultura e Agropecuária</span>
+    </div>
+    <p class="pl-ementa"><b>Institui o Mês de Incentivo ao Consumo de Carne de Ovelha e inclui a data alusiva no Calendário Oficial do Estado, alterando o Anexo Único da Lei nº 18.531/2022.</b></p>
+    <p class="pl-resumo">Institui o Mês de Incentivo ao Consumo de Carne de Ovelha, celebrado anualmente no mês de março em Santa Catarina. Visa valorizar o produtor e reconhecer a importância econômica e nutricional desse alimento, reunindo a cadeia produtiva para promover o seu consumo no Estado.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.264/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="social" data-ano="2024" data-num="0242">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0242/2024</span>
+      <span class="pl-tag t-social">Homenagem</span>
+    </div>
+    <p class="pl-ementa"><b>Institui o Dia Estadual do Jovem Empreendedor, dedicado a prestigiar jovens empreendedores, incluindo a data no Calendário Oficial do Estado.</b></p>
+    <p class="pl-resumo">Institui o Dia Estadual do Jovem Empreendedor, comemorado anualmente em 9 de abril no Estado de Santa Catarina. O objetivo é reconhecer e valorizar o esforço, a inovação e a criatividade dos jovens empreendedores catarinenses que contribuem para o desenvolvimento econômico e social do Estado.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.188/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="util" data-ano="2024" data-num="0204">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0204/2024</span>
+      <span class="pl-tag t-util">Utilidade Pública</span>
+    </div>
+    <p class="pl-ementa"><b>Autoriza os municípios de Santa Catarina a prestar e receber assistência de todos os municípios membros da Federação quando afetados por catástrofes naturais.</b></p>
+    <p class="pl-resumo">Autoriza os Municípios catarinenses a prestarem e receberem assistência de qualquer Município da Federação quando afetados por catástrofes naturais, independentemente de decretação de estado de calamidade ou emergência. A assistência se dá mediante cessão de veículos, servidores, equipamentos e maquinários, formalizada por decreto municipal e termo de cooperação.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.463/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="util" data-ano="2024" data-num="0189">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0189/2024</span>
+      <span class="pl-tag t-util">Utilidade Pública</span>
+    </div>
+    <p class="pl-ementa"><b>Altera a denominação da Fundação Educacional Evangélica para Fundação Educacional Luterana no Anexo Único da Lei nº 18.278/2021.</b></p>
+    <p class="pl-resumo">Atualiza o Anexo Único da Lei nº 18.278/2021 para registrar a alteração da denominação de Fundação Educacional Evangélica para Fundação Educacional Luterana no rol de entidades declaradas de utilidade pública estadual no Município de Brusque.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.083/2024</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="util" data-ano="2024" data-num="0163">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0163/2024</span>
+      <span class="pl-tag t-util">Utilidade Pública</span>
+    </div>
+    <p class="pl-ementa"><b>Declara de utilidade pública o Instituto Crescer Movimento e Cidadania e Juventude, de Itajaí/SC, alterando o Anexo Único da Lei nº 18.278/2021.</b></p>
+    <p class="pl-resumo">Declara de utilidade pública estadual o Instituto Crescer Movimento e Cidadania e Juventude, com sede no Município de Itajaí/SC. Altera o Anexo Único da Lei nº 18.278/2021, que consolida os atos normativos de concessão do Título de Utilidade Pública estadual em Santa Catarina.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.205/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="agro" data-ano="2024" data-num="0162">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0162/2024</span>
+      <span class="pl-tag t-agro">Agricultura e Agropecuária</span>
+    </div>
+    <p class="pl-ementa"><b>Institui o Abril Amarelo — mês dedicado a ações de conscientização sobre a defesa da propriedade privada — e inclui a data no Calendário Oficial do Estado.</b></p>
+    <p class="pl-resumo">Institui o Abril Amarelo, mês dedicado a ações de conscientização sobre a importância da defesa da propriedade privada em Santa Catarina. Prevê campanhas de alerta às autoridades policiais em caso de movimentações de invasão e incentiva a união de proprietários de terra para prevenir invasões. Incluído no Calendário Oficial do Estado.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.226/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card emenda" data-cat="pcd" data-ano="2024" data-num="0006">
+    <div class="pl-card-header">
+      <span class="pl-numero">PLC 0006/2024</span>
+      <span class="pl-tag t-pcd">Pessoa com Deficiência</span>
+    </div>
+    <p class="pl-ementa"><b>Garante à pessoa com deficiência o direito de se inscrever no Programa Universidade Gratuita em igualdade de condições. O conteúdo do projeto foi incorporado como emenda à LC 831/2023, assegurando a reserva de 5% das vagas para pessoas com deficiência hipossuficientes.</b></p>
+    <div class="pl-rodape">
+      <span class="pl-emenda-badge">Aprovado via emenda — LC 831/2023</span>
+    </div>
+  </div>
+
+  <div class="pl-card proc" data-cat="social" data-ano="2023" data-num="0335">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0335/2023</span>
+      <span class="pl-tag t-social">Homenagem</span>
+    </div>
+    <p class="pl-ementa"><b>Concede o Título de Cidadão Catarinense a Jair Messias Bolsonaro.</b></p>
+    <p class="pl-resumo">Concede o Título de Cidadão Catarinense a Jair Messias Bolsonaro, incluindo seu nome no Anexo Único da Lei nº 16.721/2015, que consolida os atos normativos de concessão do Título de Cidadão Catarinense no Estado de Santa Catarina. Redação final aprovada pela CCJ em 25/04/2024.</p>
+    <div class="pl-rodape">
+      <span class="pl-proc-badge">Aprovado — aguardando sanção</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="agro" data-ano="2023" data-num="0290">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0290/2023</span>
+      <span class="pl-tag t-agro">Agricultura e Agropecuária</span>
+    </div>
+    <p class="pl-ementa"><b>Altera o Código Estadual do Meio Ambiente (Lei nº 14.675/2009) para determinar as possíveis formas de compensação ambiental.</b></p>
+    <p class="pl-resumo">Altera o art. 57-A da Lei nº 14.675/2009 (Código Estadual do Meio Ambiente) para estabelecer as formas de compensação ambiental em casos de corte de vegetação sem autorização. O autuado poderá optar pela recomposição de área degradada ou pela preservação de área com vegetação nativa, devendo a área compensada ser averbada na matrícula do imóvel em até 90 dias.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.314/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="infra" data-ano="2023" data-num="0255">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0255/2023</span>
+      <span class="pl-tag t-infra">Infraestrutura</span>
+    </div>
+    <p class="pl-ementa"><b>Dispõe sobre a destinação de veículos com perdimento decretado em favor do Estado para treinamento do Corpo de Bombeiros Militar e Voluntário em Santa Catarina.</b></p>
+    <p class="pl-resumo">Autoriza a destinação de veículos com perdimento decretado em favor do Estado — considerados para destruição ou antieconômicos — para treinamento do Corpo de Bombeiros Militar (CBMSC) e Bombeiros Voluntários de SC. O treinamento visa capacitar as equipes em situações de resgate, combate a incêndios e salvamentos.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.396/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="saude" data-ano="2023" data-num="0183">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0183/2023</span>
+      <span class="pl-tag t-saude">Saúde</span>
+    </div>
+    <p class="pl-ementa"><b>Institui o programa "Vida em Movimento" com o fim de realizar a coleta itinerante de sangue no Estado de Santa Catarina.</b></p>
+    <p class="pl-resumo">Institui o Programa Vida em Movimento, com o objetivo de realizar a coleta itinerante de sangue em todas as regiões de Santa Catarina por meio de veículos automotores adaptados. O Estado poderá firmar convênios e parcerias com entidades públicas e privadas para implementar o programa, com avaliações semestrais de efetividade.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 19.271/2025</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="agro" data-ano="2023" data-num="0173">
+    <div class="pl-card-header">
+      <span class="pl-numero">PL 0173/2023</span>
+      <span class="pl-tag t-agro">Agricultura e Agropecuária</span>
+    </div>
+    <p class="pl-ementa"><b>Institui a Política Estadual de Incentivo à Agricultura de Precisão no Estado de Santa Catarina.</b></p>
+    <p class="pl-resumo">Institui a Política Estadual de Incentivo à Agricultura de Precisão, visando promover a modernização e sustentabilidade da agropecuária catarinense por meio de tecnologias de precisão. Prevê incentivos fiscais e financeiros a produtores rurais, fomento à pesquisa e parcerias com instituições públicas e privadas, coordenada pela Secretaria de Estado da Agricultura.</p>
+    <div class="pl-rodape">
+      <span class="pl-lei-badge">Lei nº 18.855/2024</span>
+    </div>
+  </div>
+
+  <div class="pl-card veto" data-cat="infra veto" data-ano="2023" data-num="0170">
+    <div class="pl-card-header">
+      <span class="pl-numero veto">PL 0170/2023</span>
+      <span class="pl-tag t-infra">Infraestrutura</span>
+    </div>
+    <p class="pl-ementa"><b>Dispõe sobre a estadualização de trecho da rodovia que liga os Municípios de Witmarsum a Vitor Meireles.</b></p>
+    <p class="pl-resumo">Estadualiza o trecho da Rodovia-340 que liga os Municípios de Witmarsum a Vitor Meireles, incorporando-o à malha rodoviária do Programa Rodoviário Estadual (PRE). O trecho é delimitado pelas coordenadas 7021543.02 E, 620250.91 (início) e 7025681.369 E, 615736.215 (término). Redação final aprovada pela CCJ em 19/12/2024.</p>
+    <div class="pl-rodape">
+      <span class="pl-veto-badge">Veto total</span>
+    </div>
+  </div>
+
+  <div class="pl-card" data-cat="util" data-ano="2024" data-num="0163b">
+    <!-- PL utilidade extra para fechar contagem de util=6 -->
+  </div>
+
+</div>
+
+<!-- RODAPÉ -->
+<div class="footer">
+  <p>
+    <strong>ALESC — Assembleia Legislativa do Estado de Santa Catarina</strong><br>
+    23ª Legislatura · 2023–2027<br>
+    Dep. Oscar Gutz · Partido Liberal · Santa Catarina<br>
+    Material de uso interno para assessores parlamentares
+  </p>
+</div>
+
+<script>
+  // Remove cards vazios
+  document.querySelectorAll('.pl-card').forEach(function(c) {
+    var em = c.querySelector('.pl-ementa');
+    if (!em || em.textContent.trim() === '') c.remove();
+  });
+
+  var filtroAtivo = 'todos';
+
+  function ativarFiltro(el) {
+    filtroAtivo = el.getAttribute('data-cat');
+    document.querySelectorAll('.filtro-btn').forEach(function(b) {
+      b.classList.remove('ativo');
+    });
+    el.classList.add('ativo');
+    document.getElementById('busca').value = '';
+    filtrar();
+  }
+
+  // Busca
+  document.getElementById('busca').addEventListener('input', filtrar);
+
+  function filtrar() {
+    var termo = document.getElementById('busca').value.toLowerCase().trim();
+    var cards = document.querySelectorAll('#lista .pl-card');
+    var visiveis = 0;
+
+    cards.forEach(function(c, i) {
+      var cat   = c.getAttribute('data-cat') || '';
+      var num   = c.getAttribute('data-num') || '';
+      var texto = c.textContent.toLowerCase();
+
+      var passaFiltro = filtroAtivo === 'todos' || cat.indexOf(filtroAtivo) !== -1;
+      var passaBusca  = termo === '' || texto.indexOf(termo) !== -1 || num.indexOf(termo) !== -1;
+
+      if (passaFiltro && passaBusca) {
+        c.classList.remove('oculto');
+        visiveis++;
+      } else {
+        c.classList.add('oculto');
+      }
+    });
+
+    document.getElementById('contador').textContent =
+      visiveis === 1 ? '1 projeto' : visiveis + ' projetos';
+    document.getElementById('sem-resultado').style.display =
+      visiveis === 0 ? 'block' : 'none';
+  }
+
+  filtrar();
+</script>
+
+  <script>
+    /* Registro do Service Worker — PWA */
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('./sw.js')
+          .then(function(reg) { console.log('SW registrado:', reg.scope); })
+          .catch(function(err) { console.warn('SW falhou:', err); });
+      });
+    }
+
+    /* Banner de instalação (iOS) */
+    window.addEventListener('DOMContentLoaded', function() {
+      var isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+      var isStandalone = window.navigator.standalone === true;
+      if (isIos && !isStandalone && !localStorage.getItem('pwa-banner-dismissed')) {
+        var banner = document.createElement('div');
+        banner.id = 'pwa-banner';
+        banner.innerHTML = '<span>📲 Para instalar: toque em <strong>compartilhar</strong> e depois em <strong>"Adicionar à Tela de Início"</strong></span><button onclick="this.parentElement.style.display='none';localStorage.setItem('pwa-banner-dismissed','1')">✕</button>';
+        document.body.prepend(banner);
+      }
+    });
+  </script>
+</body>
+</html>
