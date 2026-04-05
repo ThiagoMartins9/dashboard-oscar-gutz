@@ -2,21 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="manifest.json">
-
-  <!-- iOS PWA -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="Oscar Gutz">
-  <link rel="apple-touch-icon" href="icon-192.png">
-  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
-
-  <!-- Theme color (barra do navegador Android) -->
-  <meta name="theme-color" content="#0a3d22">
-  <meta name="msapplication-TileColor" content="#0a3d22">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#0a2a4a">
 <title>Mandato Oscar Gutz — ALESC 2023–2027</title>
 <style>
@@ -418,7 +404,9 @@
   .t-infra  { background: var(--infra-bg);  color: var(--infra); }
   .t-social { background: var(--social-bg); color: var(--social); }
   .t-util   { background: var(--util-bg);   color: var(--util); }
-  .t-pcd    { background: #ede8f8;          color: #3a1a7a; }
+  .t-pcd        { background: #ede8f8;          color: #3a1a7a; }
+  .t-empreend   { background: var(--empreend-bg);  color: var(--empreend); }
+  .t-protcivil  { background: var(--protcivil-bg); color: var(--protcivil); }
   .t-admin  { background: var(--admin-bg);  color: var(--admin); }
   .t-animal { background: var(--animal-bg); color: var(--animal); }
 
@@ -483,34 +471,7 @@
   .busca-input:focus { border-color: var(--azul-mid); }
 
   .busca-input::placeholder { color: var(--muted); }
-
-  /* Banner instalação PWA iOS */
-  #pwa-banner {
-    position: fixed;
-    bottom: 0; left: 0; right: 0;
-    background: #0a3d22;
-    color: white;
-    padding: 12px 16px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    font-size: 13px;
-    z-index: 9999;
-    box-shadow: 0 -2px 12px rgba(0,0,0,.3);
-  }
-  #pwa-banner button {
-    background: none;
-    border: 1px solid rgba(255,255,255,.4);
-    color: white;
-    border-radius: 50%;
-    width: 26px; height: 26px;
-    cursor: pointer;
-    flex-shrink: 0;
-    font-size: 14px;
-  }
-
-  </style>
+</style>
 </head>
 <body>
 
@@ -550,7 +511,7 @@
       <div class="stat-lbl">Sancionados</div>
     </div>
     <div class="stat-box">
-      <div class="stat-num">6</div>
+      <div class="stat-num">8</div>
       <div class="stat-lbl">Áreas temáticas</div>
     </div>
   </div>
@@ -563,7 +524,7 @@
     <div class="bar-item">
       <span class="bar-label">Utilidade pública</span>
       <div class="bar-track"><div class="bar-fill" style="width:100%;background:#185FA5;"></div></div>
-      <span class="bar-count">8</span>
+      <span class="bar-count">7</span>
     </div>
     <div class="bar-item">
       <span class="bar-label">Agric. e Agropecuária</span>
@@ -572,8 +533,8 @@
     </div>
     <div class="bar-item">
       <span class="bar-label">Infraestrutura</span>
-      <div class="bar-track"><div class="bar-fill" style="width:37%;background:#0c3d7a;"></div></div>
-      <span class="bar-count">3</span>
+      <div class="bar-track"><div class="bar-fill" style="width:25%;background:#0c3d7a;"></div></div>
+      <span class="bar-count">2</span>
     </div>
     <div class="bar-item">
       <span class="bar-label">Saúde</span>
@@ -589,6 +550,16 @@
       <span class="bar-label">Pessoa c/ Deficiência</span>
       <div class="bar-track"><div class="bar-fill" style="width:12%;background:#3a1a7a;"></div></div>
       <span class="bar-count">1</span>
+    </div>
+    <div class="bar-item">
+      <span class="bar-label">Empreendedorismo</span>
+      <div class="bar-track"><div class="bar-fill" style="width:12%;background:#b45309;"></div></div>
+      <span class="bar-count">1</span>
+    </div>
+    <div class="bar-item">
+      <span class="bar-label">Proteção Civil e Segurança</span>
+      <div class="bar-track"><div class="bar-fill" style="width:25%;background:#991b1b;"></div></div>
+      <span class="bar-count">2</span>
     </div>
   </div>
 </div>
@@ -608,6 +579,8 @@
     <button class="filtro-btn" type="button" data-cat="infra" onclick="ativarFiltro(this)">Infraestrutura</button>
     <button class="filtro-btn" type="button" data-cat="social" onclick="ativarFiltro(this)">Homenagem</button>
     <button class="filtro-btn" type="button" data-cat="pcd" onclick="ativarFiltro(this)">Pessoa com Deficiência</button>
+    <button class="filtro-btn" type="button" data-cat="empreend" onclick="ativarFiltro(this)">Empreendedorismo</button>
+    <button class="filtro-btn" type="button" data-cat="protcivil" onclick="ativarFiltro(this)">Proteção Civil e Segurança</button>
     <button class="filtro-btn" type="button" data-cat="veto" onclick="ativarFiltro(this)">Veto Total</button>
   </div>
 </div>
@@ -714,10 +687,10 @@
     </div>
   </div>
 
-  <div class="pl-card" data-cat="social" data-ano="2024" data-num="0242">
+  <div class="pl-card" data-cat="empreend" data-ano="2024" data-num="0242">
     <div class="pl-card-header">
       <span class="pl-numero">PL 0242/2024</span>
-      <span class="pl-tag t-social">Homenagem</span>
+      <span class="pl-tag t-empreend">Empreendedorismo</span>
     </div>
     <p class="pl-ementa"><b>Institui o Dia Estadual do Jovem Empreendedor, dedicado a prestigiar jovens empreendedores, incluindo a data no Calendário Oficial do Estado.</b></p>
     <p class="pl-resumo">Institui o Dia Estadual do Jovem Empreendedor, comemorado anualmente em 9 de abril no Estado de Santa Catarina. O objetivo é reconhecer e valorizar o esforço, a inovação e a criatividade dos jovens empreendedores catarinenses que contribuem para o desenvolvimento econômico e social do Estado.</p>
@@ -726,10 +699,10 @@
     </div>
   </div>
 
-  <div class="pl-card" data-cat="util" data-ano="2024" data-num="0204">
+  <div class="pl-card" data-cat="protcivil" data-ano="2024" data-num="0204">
     <div class="pl-card-header">
       <span class="pl-numero">PL 0204/2024</span>
-      <span class="pl-tag t-util">Utilidade Pública</span>
+      <span class="pl-tag t-protcivil">Proteção Civil e Segurança</span>
     </div>
     <p class="pl-ementa"><b>Autoriza os municípios de Santa Catarina a prestar e receber assistência de todos os municípios membros da Federação quando afetados por catástrofes naturais.</b></p>
     <p class="pl-resumo">Autoriza os Municípios catarinenses a prestarem e receberem assistência de qualquer Município da Federação quando afetados por catástrofes naturais, independentemente de decretação de estado de calamidade ou emergência. A assistência se dá mediante cessão de veículos, servidores, equipamentos e maquinários, formalizada por decreto municipal e termo de cooperação.</p>
@@ -779,7 +752,8 @@
       <span class="pl-numero">PLC 0006/2024</span>
       <span class="pl-tag t-pcd">Pessoa com Deficiência</span>
     </div>
-    <p class="pl-ementa"><b>Garante à pessoa com deficiência o direito de se inscrever no Programa Universidade Gratuita em igualdade de condições. O conteúdo do projeto foi incorporado como emenda à LC 831/2023, assegurando a reserva de 5% das vagas para pessoas com deficiência hipossuficientes.</b></p>
+    <p class="pl-ementa"><b>Garante à pessoa com deficiência o direito de se inscrever no Programa Universidade Gratuita em igualdade de condições.</b></p>
+    <p class="pl-resumo">O conteúdo do projeto foi incorporado como emenda à LC 831/2023, assegurando a reserva de 5% das vagas para pessoas com deficiência hipossuficientes.</p>
     <div class="pl-rodape">
       <span class="pl-emenda-badge">Aprovado via emenda — LC 831/2023</span>
     </div>
@@ -809,10 +783,10 @@
     </div>
   </div>
 
-  <div class="pl-card" data-cat="infra" data-ano="2023" data-num="0255">
+  <div class="pl-card" data-cat="protcivil" data-ano="2023" data-num="0255">
     <div class="pl-card-header">
       <span class="pl-numero">PL 0255/2023</span>
-      <span class="pl-tag t-infra">Infraestrutura</span>
+      <span class="pl-tag t-protcivil">Proteção Civil e Segurança</span>
     </div>
     <p class="pl-ementa"><b>Dispõe sobre a destinação de veículos com perdimento decretado em favor do Estado para treinamento do Corpo de Bombeiros Militar e Voluntário em Santa Catarina.</b></p>
     <p class="pl-resumo">Autoriza a destinação de veículos com perdimento decretado em favor do Estado — considerados para destruição ou antieconômicos — para treinamento do Corpo de Bombeiros Militar (CBMSC) e Bombeiros Voluntários de SC. O treinamento visa capacitar as equipes em situações de resgate, combate a incêndios e salvamentos.</p>
@@ -924,28 +898,5 @@
 
   filtrar();
 </script>
-
-  <script>
-    /* Registro do Service Worker — PWA */
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('./sw.js')
-          .then(function(reg) { console.log('SW registrado:', reg.scope); })
-          .catch(function(err) { console.warn('SW falhou:', err); });
-      });
-    }
-
-    /* Banner de instalação (iOS) */
-    window.addEventListener('DOMContentLoaded', function() {
-      var isIos = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
-      var isStandalone = window.navigator.standalone === true;
-      if (isIos && !isStandalone && !localStorage.getItem('pwa-banner-dismissed')) {
-        var banner = document.createElement('div');
-        banner.id = 'pwa-banner';
-        banner.innerHTML = '<span>📲 Para instalar: toque em <strong>compartilhar</strong> e depois em <strong>"Adicionar à Tela de Início"</strong></span><button onclick="this.parentElement.style.display='none';localStorage.setItem('pwa-banner-dismissed','1')">✕</button>';
-        document.body.prepend(banner);
-      }
-    });
-  </script>
 </body>
 </html>
