@@ -1,13 +1,13 @@
 {
-  "name": "Prestação de Contas — Dep. Oscar Gutz",
+  "name": "Oscar Gutz - ALESC 2023-2027",
   "short_name": "Oscar Gutz",
-  "description": "Painel de Prestação de Contas Parlamentar — Dep. Oscar Gutz — ALESC 23ª Legislatura 2023–2027",
-  "start_url": "./index.html",
+  "description": "Dashboard parlamentar — Dep. Oscar Gutz — ALESC 23ª Legislatura 2023–2027",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0a3d22",
-  "theme_color": "#0a3d22",
+  "background_color": "#0d3b6e",
+  "theme_color": "#0d3b6e",
   "lang": "pt-BR",
   "icons": [
     {
